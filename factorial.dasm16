@@ -1,0 +1,21 @@
+    SET A, 5	; Number to factorial
+    SET B, 0	; Result
+    SET B, A
+:loop SUB A, 1
+    IFE A, 0
+    SET PC, print
+    MUL B, A
+    SET PC, loop
+:print SET A, 0xF2B0     ; current char, starting at 0
+    SET C, 0        ; Character position
+    SET Y, B
+:print_char SHL Y, 4
+    SET I, o
+    ADD I, A
+    SET [0x8000+C], I
+    ADD C, 1
+    IFE Y, 0
+      SET PC, halt
+    SET PC, print_char
+:halt SET PC, halt
+
